@@ -1,0 +1,18 @@
+<table>
+<thead>
+<tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<% @articles.each do |article| %>
+<tr>
+    <td><%=article.title %></td>
+    <th><%=article.description %></th>
+    <th>place</th>
+</tr>
+<% end %>
+</tbody>
+</table>
