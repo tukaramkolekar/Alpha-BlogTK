@@ -1,7 +1,9 @@
 class ArticlesController < ApplicationController
+
+    before_action :set_article, only: [:edit, :update, :show, :destroy]
     def show
         #binding.break #for debuging the code to read params passed
-        @article =Article.find(params[:id])
+      
     end
 
     
@@ -16,8 +18,6 @@ class ArticlesController < ApplicationController
 
     def edit
        
-        @article=Article.find(params[:id])
-       
     end
 
     def update
@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
         if @article.update(params.require(:article).permit(:title, :description))
             flash[:notice]= "Article upadated successfully"
         else
-            render :edit
+            render 'edit'
         end
     end
 
@@ -36,9 +36,9 @@ class ArticlesController < ApplicationController
         if @article.save
             flash[:notice] = "Article was created successfully"
         #  redirect_to show()
-        redirect_to @article
+        redirect_to articles_path(@article)
         else
-            render :new
+            render 'new'
        end
     end
       private
@@ -50,10 +50,10 @@ class ArticlesController < ApplicationController
         @article=Article.find(params[:id])
         @article.destroy
         redirect_to articles_path
-
-
         end
-
+        def set_article
+            @article = Article.find(params[:id])
+         end
  
 
 end
